@@ -16,14 +16,14 @@ using namespace System::Security::Permissions;
 [assembly:AssemblyConfigurationAttribute(L"")];
 [assembly:AssemblyCompanyAttribute(L"SillyBits")];
 [assembly:AssemblyProductAttribute(L"")];
-[assembly:AssemblyCopyrightAttribute(L"Copyright (c) 2020 SillyBits")];
+[assembly:AssemblyCopyrightAttribute(L"Copyright (c) 2020-2021 SillyBits")];
 [assembly:AssemblyTrademarkAttribute(L"")];
 [assembly:AssemblyCultureAttribute(L"")];
 
 [assembly:ComVisible(false)];
 
-[assembly:AssemblyVersionAttribute("0.1.*")];
-//[assembly:AssemblyFileVersionAttribute("0.1.*")]
-[assembly: AssemblyInformationalVersion("0.1 alpha")]
+[assembly:AssemblyVersionAttribute("0.2.*")];
+//[assembly:AssemblyFileVersionAttribute("0.2.*")]
+[assembly: AssemblyInformationalVersion("0.2 alpha")]
 
 [assembly:CLSCompliantAttribute(true)];

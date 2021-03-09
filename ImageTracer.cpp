@@ -4,6 +4,10 @@
 #include "stdafx.h"
 #include "ImageTracer.h"
 
+#ifdef _OPENMP
+#pragma message("-> Compiling with OpenMP")
+#endif
+
 
 namespace ImageTracer 
 {
@@ -236,12 +240,14 @@ void ImageTracer::_Trace(byte* pixels, const int width, const int height, const 
 	// Sequential layering
 
 	// Loop over all color indices found
-	std::auto_ptr<int> ap_layer(new int[bordered_length]);
-	int* layer = ap_layer.get();
-	for (byte color_index = min; color_index <= max; ++color_index)
+#pragma omp parallel for shared(options, min, max, bordered_pixels, bordered_width, bordered_height, bordered_length)
+	for (int color_index = min; color_index <= max; ++color_index)
 	{
 		// layeringstep -> pathscan -> internodes -> batchtracepaths
-		_LayeringStep(bordered_pixels, bordered_width, bordered_height, color_index, layer);
+		std::auto_ptr<int> ap_layer(new int[bordered_length]);
+		int* layer = ap_layer.get();
+		_LayeringStep(bordered_pixels, bordered_width, bordered_height, (byte)color_index, layer);
+
 		PathList tracedlayer =
 			_BatchTracePaths(							
 				_InterNodes(								
@@ -260,10 +266,9 @@ void ImageTracer::_Trace(byte* pixels, const int width, const int height, const 
 		// adding traced layer
 		PolyList polys;
 		for (auto p : tracedlayer)
-		{
-			//SegmentList *segments;
 			polys.push_back(Poly(p.segments));
-		}
+
+#	pragma omp critical
 		Layers.push_back(Layer(polys, color_index));
 	}
 

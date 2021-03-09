@@ -13,6 +13,8 @@
 #include <string.h>
 #include <memory.h>
 
+#include <omp.h>
+
 
 using namespace System;
 using namespace System::Collections::Generic;

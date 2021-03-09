@@ -1,5 +1,5 @@
-'ImageTracer' v0.1 alpha
-(c) 2020 SillyBits
+'ImageTracer' v0.2 alpha
+(c) 2020-2021 SillyBits
 
 
 This is a minimal port of ImageTracerJS v1.2.5 (https://github.com/jankovicsandras/imagetracerjs).
